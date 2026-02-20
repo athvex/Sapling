@@ -2,8 +2,6 @@
 
 Sapling is a beautiful, mobile-friendly Progressive Web App (PWA) for tracking habits, focus sessions, and daily reflections. Built with vanilla HTML, CSS, and JavaScript, it works offline and can be installed on any device.
 
-![Sapling App](image.png)
-
 ## 🚀 Live Demo
 
 Check out the live version of Sapling:  
