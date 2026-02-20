@@ -39,7 +39,6 @@ nav {
   color: #2e4d39;
 }
 
-/* Hide checkbox */
 #menu-toggle {
   display: none;
 }
@@ -398,7 +397,6 @@ select {
   margin-bottom: 0.3rem;
 }
 
-/* Mobile styles - FULLY FIXED */
 @media (max-width: 700px) {
   .hamburger {
     display: block;
@@ -448,7 +446,6 @@ select {
     align-items: flex-start;
   }
 
-  /* FIXED: Stats grid - 2x2 and compact */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.5rem;
@@ -466,7 +463,6 @@ select {
     font-size: 0.7rem;
   }
 
-  /* FIXED: Habit selector - compact with side-by-side buttons */
   .habit-selector-area {
     flex-direction: row !important;
     flex-wrap: wrap;
@@ -487,7 +483,6 @@ select {
     font-size: 0.85rem;
   }
 
-  /* FIXED: Habit edit group */
   .habit-edit-group {
     flex-direction: row !important;
     flex-wrap: wrap;
@@ -538,7 +533,6 @@ select {
     min-width: 480px;
   }
 
-  /* Even smaller stats for very small screens */
   .stat-value {
     font-size: 1.1rem;
   }

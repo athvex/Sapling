@@ -240,14 +240,12 @@
         } else document.getElementById('dash-habit-pct').innerText = '0%';
     }
 
-    // Section persistence
     const savedSection = localStorage.getItem('saplingActiveSection') || 'dashboard';
     document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
     const targetSection = document.getElementById(savedSection);
     if (targetSection) targetSection.classList.add('active-section');
     else document.getElementById('dashboard').classList.add('active-section');
 
-    // Close mobile menu when a nav button is clicked
     const menuToggle = document.getElementById('menu-toggle');
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -255,7 +253,6 @@
             document.querySelectorAll('section').forEach(s => s.classList.remove('active-section'));
             document.getElementById(sectionId).classList.add('active-section');
             localStorage.setItem('saplingActiveSection', sectionId);
-            // Uncheck the menu toggle to close hamburger menu on mobile
             if (menuToggle) menuToggle.checked = false;
         });
     });
@@ -382,7 +379,6 @@
     renderJournalEntries();
     updateTimerDisplay();
     updateDashboard();
-        // PWA install banner
     let deferredPrompt;
     const installBanner = document.getElementById('install-banner');
     const installBtn = document.getElementById('install-btn');
@@ -391,7 +387,6 @@
     window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Show banner only if not already installed (you can also check via matchMedia)
     installBanner.classList.remove('hidden');
     });
 
@@ -408,7 +403,6 @@
     installBanner.classList.add('hidden');
     });
 
-    // Optional: hide banner if app is already installed (display-mode: standalone)
     if (window.matchMedia('(display-mode: standalone)').matches) {
     installBanner.classList.add('hidden');
     }
