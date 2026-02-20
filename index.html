@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Sapling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon-512x512.png">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/x-icon" href="assets/images/icon.ico">
+</head>
+<body>
+<div class="app-container">
+    <nav>
+        <div class="logo">Sapling</div>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="hamburger">☰</label>
+        <ul class="nav-links">
+            <li><button class="nav-btn" data-section="dashboard">Dashboard</button></li>
+            <li><button class="nav-btn" data-section="focus">Focus</button></li>
+            <li><button class="nav-btn" data-section="habits">Habits</button></li>
+            <li><button class="nav-btn" data-section="journal">Journal</button></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+      <div id="install-banner" class="install-banner hidden">
+        <p>Install Sapling for quick access & offline use</p>
+        <button id="install-btn">Install</button>
+        <button id="close-banner">Not now</button>
+      </div>
+        <section id="dashboard">
+            <h1>Dashboard</h1>
+            <div class="stats-grid" style="grid-template-columns:repeat(2,1fr)">
+                <div class="stat-item"><span class="stat-value" id="dash-focus-min">0</span><div class="stat-label">focus min today</div></div>
+                <div class="stat-item"><span class="stat-value" id="dash-distract">0</span><div class="stat-label">distractions</div></div>
+                <div class="stat-item"><span class="stat-value" id="dash-habit-pct">0%</span><div class="stat-label">habit done today</div></div>
+                <div class="stat-item"><span class="stat-value" id="dash-sessions">0</span><div class="stat-label">sessions</div></div>
+            </div>
+        </section>
+
+        <section id="focus">
+            <h1>Focus session</h1>
+            <div class="card">
+                <div class="timer" id="timer">25:00</div>
+                <div class="duration-selector">
+                    <label for="focus-length">Duration:</label>
+                    <select id="focus-length">
+                        <option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option>
+                        <option value="20">20 min</option><option value="25" selected>25 min</option><option value="30">30 min</option>
+                        <option value="45">45 min</option><option value="60">60 min</option>
+                    </select>
+                </div>
+                <div class="flex-row">
+                    <button id="start-focus">Start</button>
+                    <button id="pause-focus" class="secondary">Pause</button>
+                    <button id="reset-focus" class="secondary">Reset</button>
+                </div>
+                <div class="distraction-row">
+                    <button id="distraction-btn" style="background:#b5917c;">+ I got distracted</button>
+                    <span>Distractions: <strong id="distraction-count">0</strong></span>
+                </div>
+            </div>
+            <h2>Past sessions</h2>
+            <div class="session-list" id="session-list"></div>
+        </section>
+
+        <section id="habits">
+            <h1>Habit tracker</h1>
+            <div class="card">
+                <div class="habit-selector-area">
+                    <select id="habit-select"></select>
+                    <button id="edit-habit-btn" class="secondary">Rename</button>
+                    <button id="delete-habit-btn" class="secondary">Delete</button>
+                </div>
+                <div class="habit-edit-group">
+                    <input type="text" id="new-habit-name" placeholder="New habit name">
+                    <button id="add-habit-btn">Add habit</button>
+                </div>
+            </div>
+
+            <div class="stats-grid" id="habit-stats">
+                <div class="stat-item"><span class="stat-value" id="current-streak">0</span><div class="stat-label">current streak</div></div>
+                <div class="stat-item"><span class="stat-value" id="longest-streak">0</span><div class="stat-label">longest streak</div></div>
+                <div class="stat-item"><span class="stat-value" id="total-days">0</span><div class="stat-label">total days</div></div>
+                <div class="stat-item"><span class="stat-value" id="completion-rate">0%</span><div class="stat-label">this month</div></div>
+            </div>
+
+            <div class="calendar-header">
+                <button id="prev-month" class="secondary">←</button>
+                <span class="month-year" id="month-year-display"></span>
+                <button id="next-month" class="secondary">→</button>
+                <button id="today-calendar" class="today-btn" style="background:#b5917c; color:white; border:none;">Today</button>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+
+            <h2>Year heatmap</h2>
+            <div class="heatmap-container">
+                <div class="heatmap-grid" id="heatmap-grid"></div>
+                <div class="heatmap-legend">
+                    <span>■ less</span> <span style="color:#689f7a;">■ more (completed)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="journal">
+            <h1>Daily reflection</h1>
+            <div class="card">
+                <textarea id="journal-text" rows="8" placeholder="write how you spent your day"></textarea>
+                <button id="save-journal" style="margin-top:1rem;">Save</button>
+            </div>
+            <div class="past-entries" id="journal-entries"></div>
+        </section>
+    </main>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker registered'))
+        .catch(err => console.log('Service Worker registration failed:', err));
+    });
+  }
+</script>
+</body>
+</html>
