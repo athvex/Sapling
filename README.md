@@ -5,7 +5,7 @@ Sapling is a beautiful, mobile-friendly Progressive Web App (PWA) for tracking h
 ## 🚀 Live Demo
 
 Check out the live version of Sapling:  
-**[https://athvex.github.io/sapling](https://athvex.github.io/sapling)** ✨
+**[https://athvex.github.io/Sapling](https://athvex.github.io/Sapling)** ✨
 
 ## ✨ Features
 
